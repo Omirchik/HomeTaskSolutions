@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+      #cards .card{
+        border:1px solid red;
+        display:flex;
+        width:300px;
+      }
+      #cards .card .title{
+        flex-grow: 1;
+      }
+      #cards .card .price{
+        font-weight: bold;
+        padding-right: 20px;
+      }
+      #loading{
+        display: none;
+      }
+      #cards{
+        width:300px;
+        height:200px;
+        border: 1px solid blue;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <button>Load</button>
+    <div id="cards">
+      <img width="300px" height="200px" id="loading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+    </div>
+
+
+    <script defer>
+    	const lo=document.querySelector('#loading');
+
+    	function onClick() {
+    		lo.style.display="block";
+
+    		fetch('http://demo4296963.mockable.io/listCars').then(second).then(third);
+    	}
+    	function second(response){
+    		return response.json();
+    	}
+    	function third(json){
+    		
+    		const cards=document.querySelector('#cards');
+    		for (var i = 0; i < json.length; i++) {
+    			const car=document.createElement('div');
+    			car.className='card';
+
+    			const title=document.createElement('p');
+    			title.className='title';
+    			title.textContent=json[i].maker+" "+json[i].model;
+    			const price=document.createElement('p');
+    			price.className='price';
+    			price.textContent=json[i].price;
+
+    			car.appendChild(title);
+    			car.appendChild(price);
+    			cards.appendChild(car);
+
+    		}
+    		lo.style.display='none';
+
+    	}
+
+		button=document.querySelector('button');
+		button.addEventListener('click',onClick);
+
+    </script>
+  </body>
+
+</html>
+
+

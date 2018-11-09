@@ -1,0 +1,9 @@
+#buts{
+	display: flex;
+}
+#table{
+	height: 500px;
+	width: 500px;
+	border:2px solid red;
+}
+
